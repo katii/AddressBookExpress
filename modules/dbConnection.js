@@ -38,8 +38,12 @@ exports.addUser = function(req,res){
         }
         else{
             console.log("New user added");
+            res.render('index');
         }
     });
 }
     
+exports.validateUserInfo = function(req,res){
+    console.log("wuhuu");
+}
                  
