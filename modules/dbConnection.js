@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var url = "mongodb://localhost/courses";
+var url = "mongodb://localhost/addressBook";
 
 // Check the connection
 mongoose.connect(url, function(err,succ){
@@ -17,7 +17,7 @@ var Schema = mongoose.Schema;
 
 var users = new Schema({
     name:{type:String,index:{unique:true}},
-    passwork:String,
+    password:String,
     email:String
 });
 
@@ -34,10 +34,13 @@ exports.addUser = function(req,res){
     
     temp.save(function(err){
         if(err){
-            console.log("Error");
+            console.log("Error" + err);
         }
         else{
             console.log("New user added");
+            console.log(req.body.username);
+            console.log(req.body.password);
+            console.log(req.body.email);
             res.render('index');
         }
     });
@@ -46,7 +49,7 @@ exports.addUser = function(req,res){
     console.log("List users");
     User.find(function(err,data){
         if(err){
-            res.render("Error");
+            res.render("Error" + err);
             //res.render("myerror",{});
         }
         else{
@@ -57,18 +60,59 @@ exports.addUser = function(req,res){
     /********/
 }
     
-exports.validateUserInfo = function(req,res){
+exports.login = function(req,res){
     console.log("wuhuu");
-    console.log(req.body);
-    User.findByName(req.query.name, function(err,data){
+    console.log(req.body.username);
+    console.log(req.body.password);
+    
+    console.log("List users");
+    User.find(function(err,data){
+        if(err){
+            res.render("Error" + err);
+            //res.render("myerror",{});
+        }
+        else{
+            console.log(data);
+
+            for(i=0; i<data.length; i++){
+                console.log("käyttäjät: " + data[i].name + data[i].password);
+                
+                if(data[i].name == req.body.username){
+                    console.log("on sama" + data[i].name + " " + data[i].password );
+                }
+                else{
+                    console.log("ei oo sama");
+                    
+                }
+                
+            }
+ 
+            
+            
+            //res.render('userlist',{users_data:data});
+        }
+    });
+    
+/**
+    User.find(function(err,data){
         if(err){
             console.log("not found");
         }
         else{
-            console.log("yes found" + data);
+            console.log("yes found" + data );
+            for(i=0; i<data.length; i++){
+                console.log("juuseri: " + data.name + data.password);
+                if(data[i].name == req.body.username){
+                    console.log("on sama" + data[i].name + " " + data[i].password );
+                }
+                else{
+                    console.log("ei oo sama");
+                }
+            }
             //res.render('loginview', data);
         }
     });
+**/
 }
 
 exports.listusers = function(req,res){
@@ -84,3 +128,6 @@ exports.listusers = function(req,res){
         }
     });
 }
+
+/* malli.find({name:'markus'}, function(err,data) {
+}); */

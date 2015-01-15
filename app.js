@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/register', routes.register);
 app.use('/addUser', db.addUser);
-app.use('/userView', routes.usersview);
+app.use('/userView', db.login);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
