@@ -77,8 +77,9 @@ exports.login = function(req,res){
             for(i=0; i<data.length; i++){
                 console.log("käyttäjät: " + data[i].name + data[i].password);
                 
-                if(data[i].name == req.body.username){
-                    console.log("on sama" + data[i].name + " " + data[i].password );
+                if(data[i].name == req.body.username && data[i].password == req.body.password ){
+                    console.log("on sama " + data[i].name + " " + data[i].password );
+                    res.render('index');
                 }
                 else{
                     console.log("ei oo sama");
