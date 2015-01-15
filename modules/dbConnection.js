@@ -41,9 +41,46 @@ exports.addUser = function(req,res){
             res.render('index');
         }
     });
+    
+    /********/
+    console.log("List users");
+    User.find(function(err,data){
+        if(err){
+            res.render("Error");
+            //res.render("myerror",{});
+        }
+        else{
+            console.log(data);
+            //res.render('userlist',{users_data:data});
+        }
+    });
+    /********/
 }
     
 exports.validateUserInfo = function(req,res){
     console.log("wuhuu");
+    console.log(req.body);
+    User.findByName(req.query.name, function(err,data){
+        if(err){
+            console.log("not found");
+        }
+        else{
+            console.log("yes found" + data);
+            //res.render('loginview', data);
+        }
+    });
 }
-                 
+
+exports.listusers = function(req,res){
+    console.log("List users");
+    User.find(function(err,data){
+        if(err){
+            res.render("Error");
+            //res.render("myerror",{});
+        }
+        else{
+            console.log(data);
+            //res.render('userlist',{users_data:data});
+        }
+    });
+}

@@ -5,15 +5,15 @@ block content
   form(action="/addUser", method="post", data-ajax="false")
     label User name
     br
-    input(type="text", name="username")
+    input(type="text", name="username", required)
     br
     label Password
     br
-    input(type="password", name="password")
+    input(type="password", name="password", required)
     br
     label Email address
     br
-    input(type="email", name="email")
+    input(type="email", name="email", required)
     br
     input(type="submit", value="Register")
     

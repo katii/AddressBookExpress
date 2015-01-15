@@ -10,4 +10,8 @@ router.register = function(req,res){
     res.render("registerUser",{});
 }
 
+router.usersview = function(req,res){
+    res.render("loggedView",{});
+}
+
 module.exports = router;
